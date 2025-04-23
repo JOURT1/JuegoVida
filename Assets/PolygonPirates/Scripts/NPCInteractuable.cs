@@ -6,7 +6,7 @@ public class NPCInteractuable : MonoBehaviour
     public GameObject textoInteraccion;
     public GameObject panelDialogo;
     public TMP_Text textoDialogo;
-    public string pista = "El mar oculta más de lo que muestra. Revisa el fondo...";
+    public string pista = "El mar oculta más de lo que muestra, donde los mariscos son codiciados. Revisa el fondo...";
     private Animator animator;
     private bool jugadorCerca = false;
 
@@ -24,6 +24,7 @@ public class NPCInteractuable : MonoBehaviour
             textoInteraccion.SetActive(false);
             animator.SetTrigger("Hablar"); // tu animación debe tener este trigger
             MostrarPista();
+            
         }
     }
 
