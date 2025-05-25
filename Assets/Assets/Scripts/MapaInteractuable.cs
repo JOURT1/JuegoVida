@@ -7,9 +7,10 @@ public class MapaInteractuable : MonoBehaviour
     public GameObject panelDialogo;
     public TMP_Text textoDialogo;
     [TextArea(3, 5)]
-    public string mensajeEncriptado = "Tres guardianas de hojas ondean solas, donde el horizonte besa lo profundo. Allí duerme lo que dejé atrás.";
+    public string mensajeEncriptado = "Donde la sombra del árbol besa la arena, descansa una pista olvidada. Escucha el susurro del viento entre las hojas, pues allí yace lo que buscas.";
 
     private bool jugadorCerca = false;
+    private bool dialogoActivo = false;
 
     void Start()
     {
@@ -24,18 +25,24 @@ public class MapaInteractuable : MonoBehaviour
             textoInteraccion.SetActive(false);
             MostrarMensaje();
         }
+
+        if (dialogoActivo && Input.GetKeyDown(KeyCode.F))
+        {
+            OcultarMensaje();
+        }
     }
 
     void MostrarMensaje()
     {
         panelDialogo.SetActive(true);
         textoDialogo.text = mensajeEncriptado;
-        Invoke("OcultarMensaje", 6f);
+        dialogoActivo = true;
     }
 
     void OcultarMensaje()
     {
         panelDialogo.SetActive(false);
+        dialogoActivo = false;
     }
 
     void OnTriggerEnter(Collider other)

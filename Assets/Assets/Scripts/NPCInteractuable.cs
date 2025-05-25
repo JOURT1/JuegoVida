@@ -6,9 +6,10 @@ public class NPCInteractuable : MonoBehaviour
     public GameObject textoInteraccion;
     public GameObject panelDialogo;
     public TMP_Text textoDialogo;
-    public string pista = "El mar oculta más de lo que muestra, donde los mariscos son codiciados. Revisa el fondo...";
+    public string pista = "Bajo las tablas, el mar susurra. Sigue la sombra que se esconde donde el sol no alcanza.\r\n";
     private Animator animator;
     private bool jugadorCerca = false;
+    private bool dialogoActivo = false;
 
     void Start()
     {
@@ -22,9 +23,13 @@ public class NPCInteractuable : MonoBehaviour
         if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
         {
             textoInteraccion.SetActive(false);
-            animator.SetTrigger("Hablar"); // tu animación debe tener este trigger
+            animator.SetTrigger("Hablar");
             MostrarPista();
-            
+        }
+
+        if (dialogoActivo && Input.GetKeyDown(KeyCode.F))
+        {
+            CerrarDialogo();
         }
     }
 
@@ -32,12 +37,13 @@ public class NPCInteractuable : MonoBehaviour
     {
         panelDialogo.SetActive(true);
         textoDialogo.text = pista;
-        Invoke("OcultarPista", 5f);
+        dialogoActivo = true;  // Activamos el estado para cerrar con F
     }
 
-    void OcultarPista()
+    void CerrarDialogo()
     {
         panelDialogo.SetActive(false);
+        dialogoActivo = false;  // Desactivamos el estado
     }
 
     void OnTriggerEnter(Collider other)
